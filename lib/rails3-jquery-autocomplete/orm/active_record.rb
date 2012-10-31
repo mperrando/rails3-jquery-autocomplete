@@ -17,7 +17,7 @@ module Rails3JQueryAutocomplete
         where   = options[:where]
         limit   = get_autocomplete_limit(options)
         order   = get_autocomplete_order(method, options, model)
-
+        uniq    = options[:uniq] || false
 
         items = model.scoped
 
@@ -27,7 +27,7 @@ module Rails3JQueryAutocomplete
         items = items.where(get_autocomplete_where_clause(model, term, method, options)).
             limit(limit).order(order)
         items = items.where(where) unless where.blank?
-
+        items = items.uniq_by{|item| item.send(method)} if uniq
         items
       end
 

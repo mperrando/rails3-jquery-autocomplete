@@ -177,6 +177,15 @@ Autocomplete uses Yajl as JSON encoder/decoder, but you can specify your own
       end
     end
 
+#### :uniq => true
+
+By default, the search will display duplicate values of the display field. If you want to display only unique values,  set the _uniq_ parameter to true.
+
+    class ProductsController < Admin::BaseController
+      autocomplete :brand, :name, :uniq => true
+    end
+
+
 ### View
 
 On your view, all you have to do is include the attribute autocomplete on the text field
